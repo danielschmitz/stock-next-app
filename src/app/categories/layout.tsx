@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react'
 
 export default function layout({ children }: PropsWithChildren) {
   return (
@@ -6,5 +6,5 @@ export default function layout({ children }: PropsWithChildren) {
       <h2>Categories</h2>
       <div>{children}</div>
     </div>
-  );
+  )
 }

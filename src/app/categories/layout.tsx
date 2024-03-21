@@ -1,10 +1,13 @@
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { PropsWithChildren } from 'react'
 
 export default function layout({ children }: PropsWithChildren) {
   return (
-    <div>
-      <h2>Categories</h2>
-      <div>{children}</div>
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Categories</CardTitle>
+      </CardHeader>
+      <CardContent>{children}</CardContent>
+    </Card>
   )
 }

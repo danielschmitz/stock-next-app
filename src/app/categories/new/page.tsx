@@ -2,11 +2,17 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
 export default function page() {
+
+  async function createCategory(formData: FormData) {
+    'use server'
+    console.log("Create Category with formData", formData)
+  }
+
   return (
     <div>
       <h2>New Category</h2>
       <div className="flex flex-row w-full m-5">
-        <form>
+        <form action={createCategory}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
               Name

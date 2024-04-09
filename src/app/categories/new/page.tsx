@@ -44,14 +44,14 @@ export default function page() {
               placeholder="Category name"
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex justify-between">
+            <Button asChild variant="outline">
+              <Link href="/categories">Back</Link>
+            </Button>
             <Submit>Save</Submit>
           </div>
         </form>
       </div>
-      <Button asChild variant="outline">
-        <Link href="/categories">Back</Link>
-      </Button>
     </div>
   )
 }

@@ -2,12 +2,13 @@ import { Button } from '@/components/ui/button'
 import { PrismaClient } from '@prisma/client'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import Submit from '../Submit'
 
 export default function page() {
   async function createCategory(formData: FormData) {
     'use server'
     // console.log('Create Category with formData', formData)
-    
+
     const formObject = Object.fromEntries(formData)
 
     if (!formObject.name) {
@@ -44,7 +45,7 @@ export default function page() {
             />
           </div>
           <div className="flex items-center justify-between">
-            <button type="submit">Save</button>
+            <Submit>Save</Submit>
           </div>
         </form>
       </div>

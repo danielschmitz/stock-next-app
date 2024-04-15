@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Submit from '../../Submit'
 
 interface UpdateFormProps {
+  onSubmit: string | ((formData: FormData) => void) | undefined
   data: {
     id: string
     name: string
@@ -17,7 +18,7 @@ export default function UpdateForm(props: UpdateFormProps) {
 
   return (
     <div>
-      <form>
+      <form action={props.onSubmit}>
         <input type="hidden" name="id" value={props.data.id} />
         <label>
           Name:
@@ -27,7 +28,7 @@ export default function UpdateForm(props: UpdateFormProps) {
               leading-tight focus:outline-none focus:shadow-outline min-w-[300px]"
             id="name"
             name="name"
-            value={props.data.name}
+            defaultValue={props.data.name}
             onChange={handleChange}
           />
         </label>

@@ -12,11 +12,5 @@ export default async function page({ params }: PageParams) {
   const prisma = new PrismaClient()
   const category = await prisma.category.findUniqueOrThrow({ where: { id } })
 
-  return (
-    <div>
-      id: {id} - name: {category.name}
-      <br />
-      <UpdateForm />
-    </div>
-  )
+  return <UpdateForm data={category} />
 }

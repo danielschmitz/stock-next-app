@@ -1,15 +1,38 @@
 'use client'
-
 import { useState } from 'react'
+import Submit from '../../Submit'
 
-export default function UpdateForm() {
-  const [count, setCount] = useState(0)
-  const handleClick = () => setCount(count + 1)
+interface UpdateFormProps {
+  data: {
+    id: string
+    name: string
+  }
+}
+
+export default function UpdateForm(props: UpdateFormProps) {
+  const [name, setName] = useState(props.data.name)
+  function handleChange(event: any) {
+    setName(event.target.value)
+  }
 
   return (
     <div>
-      <p>You clicked {count} times</p>
-      <button onClick={handleClick}>Click me</button>
+      <form>
+        <input type="hidden" name="id" value={props.data.id} />
+        <label>
+          Name:
+          <input
+            type="text"
+            className="shadow appearance-none border rounded w-full py-2 px-3 m-3 text-gray-700 
+              leading-tight focus:outline-none focus:shadow-outline min-w-[300px]"
+            id="name"
+            name="name"
+            value={props.data.name}
+            onChange={handleChange}
+          />
+        </label>
+        <Submit>Save</Submit>
+      </form>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import UpdateForm from './form'
 
 interface PageParams {
   params: {
@@ -14,6 +15,8 @@ export default async function page({ params }: PageParams) {
   return (
     <div>
       id: {id} - name: {category.name}
+      <br />
+      <UpdateForm />
     </div>
   )
 }

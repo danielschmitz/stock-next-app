@@ -10,10 +10,37 @@ import {
 } from '@/components/ui/table'
 import { PrismaClient } from '@prisma/client'
 import Link from 'next/link'
+import DeleteDialog from '../../components/delete-dialog'
+import { redirect } from 'next/navigation'
 
 export default async function page() {
   const prisma = new PrismaClient()
   const categories = await prisma.category.findMany()
+
+  async function deleteCategory(id: string) {
+    'use server'
+
+    const prisma = new PrismaClient()
+
+    const category = await prisma.category.findUnique({ where: { id } })
+
+    if (!category) {
+      throw new Error('Category not found')
+    }
+
+    const hasProducts = await prisma.product.findFirst({
+      where: {
+        categoryId: id
+      }
+    })
+    if (hasProducts) {
+      throw new Error('Category has products, can not be deleted')
+    }
+
+    await prisma.category.delete({ where: { id } })
+
+    redirect('/categories')
+  }
 
   return (
     <div>
@@ -34,9 +61,11 @@ export default async function page() {
                   <Button asChild variant="link">
                     <Link href={`/categories/edit/${category.id}`}>Edit</Link>
                   </Button>
-                  <Button asChild variant="link">
-                    <Link href={`/categories/del/${category.id}`}>Delete</Link>
-                  </Button>
+                  <DeleteDialog
+                    message={`Delete ${category.name}?`}
+                    id={category.id}
+                    actionYes={deleteCategory}
+                  ></DeleteDialog>
                 </div>
               </TableCell>
             </TableRow>
